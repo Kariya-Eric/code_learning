@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--  spring配置文件的模板，最好放在类路径中方便一致    -->
+    <!-- id为bean唯一标识不可重复， class类的全路径-->
+    <bean id="user" class="org.kariya.bean.User"></bean>
+
+    <bean id="userDao" class="org.kariya.dao.impl.UserDaoImplForOracle"/>
+
+    <!-- set注入 -->
+    <bean id="userService" class="org.kariya.service.impl.UserServiceImpl">
+        <!-- 调用set方法set注入，set方法名中去掉set后首字母小写对应name -->
+        <!-- <property name="userDao" ref="userDao"/> -->
+        <property name="userDao">
+            <!-- 内部bean方式注入 -->
+            <bean class="org.kariya.dao.impl.UserDaoImplForMysql"></bean>
+        </property>
+    </bean>
+
+    <!-- 构造方法注入 -->
+    <bean id="vipService" class="org.kariya.service.impl.VipServiceImpl">
+        <!-- 构造方法按照参数列表注入 -->
+        <!-- <constructor-arg index="0" ref="userDao"/> -->
+        <!-- 按照name匹配 -->
+        <!-- <constructor-arg name="userDao" ref="userDao" /> -->
+        <!-- 按照类型匹配注入 -->
+        <constructor-arg type="org.kariya.dao.UserDao" ref="userDao"/>
+    </bean>
+
+    <!-- 简单类型注入 -->
+    <bean id="cat" class="org.kariya.bean.Cat">
+        <property name="age" value="10" />
+        <property name="name" value="咪咪" />
+        <property name="color" value="白色" />
+    </bean>
+</beans>
