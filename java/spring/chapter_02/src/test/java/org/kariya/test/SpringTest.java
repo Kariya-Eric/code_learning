@@ -7,6 +7,8 @@ import org.kariya.service.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import javax.sql.DataSource;
+
 /**
  * @Description spring
  * @Author Kariya
@@ -45,5 +47,12 @@ public class SpringTest {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
         Cat cat = (Cat) context.getBean("cat");
         log.info("Cat bean :{}", cat);
+    }
+    
+    @Test
+    public void demo05() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+        DataSource datasource = (DataSource) context.getBean("datasource");
+        log.info("Datasource :{}", datasource);
     }
 }

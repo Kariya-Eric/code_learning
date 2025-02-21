@@ -31,8 +31,15 @@
 
     <!-- 简单类型注入 -->
     <bean id="cat" class="org.kariya.bean.Cat">
-        <property name="age" value="10" />
-        <property name="name" value="咪咪" />
-        <property name="color" value="白色" />
+        <property name="age" value="10"/>
+        <property name="name" value="咪咪"/>
+        <property name="color" value="白色"/>
+    </bean>
+
+    <bean id="datasource" class="org.kariya.jdbc.MyDatasource">
+        <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/table"/>
     </bean>
 </beans>
